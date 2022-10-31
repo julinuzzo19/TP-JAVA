@@ -8,3 +8,6 @@
 
 - http://localhost:8080/registration
 - http://localhost:8080/login
+
+Swagger 2
+- http://localhost:8080/swagger-ui/
