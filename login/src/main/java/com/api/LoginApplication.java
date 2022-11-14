@@ -6,9 +6,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-public class BooksApplication {
+public class LoginApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BooksApplication.class, args);
+        SpringApplication.run(LoginApplication.class, args);
     }
 }

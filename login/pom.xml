@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.api</groupId>
-    <artifactId>book</artifactId>
+    <artifactId>login</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>book</name>
+    <name>login</name>
     <description>Aplication Java</description>
 
     <parent>
