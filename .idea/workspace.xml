@@ -43,7 +43,7 @@
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
-  <component name="RunManager" selected="JAR Application.book-0.0.1-SNAPSHOT.jar (1)">
+  <component name="RunManager" selected="JAR Application.login-0.0.1-SNAPSHOT.jar">
     <configuration name="book-0.0.1-SNAPSHOT.jar (1)" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/books/target/book-0.0.1-SNAPSHOT.jar" />
       <method v="2" />
@@ -52,8 +52,13 @@
       <option name="JAR_PATH" value="$PROJECT_DIR$/login/target/book-0.0.1-SNAPSHOT.jar" />
       <method v="2" />
     </configuration>
+    <configuration name="login-0.0.1-SNAPSHOT.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/login/target/login-0.0.1-SNAPSHOT.jar" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JAR Application.login-0.0.1-SNAPSHOT.jar" />
         <item itemvalue="JAR Application.book-0.0.1-SNAPSHOT.jar (1)" />
         <item itemvalue="JAR Application.book-0.0.1-SNAPSHOT.jar" />
       </list>
@@ -67,7 +72,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1668457759518</updated>
-      <workItem from="1668457771485" duration="5069000" />
+      <workItem from="1668457771485" duration="5709000" />
     </task>
     <servers />
   </component>
