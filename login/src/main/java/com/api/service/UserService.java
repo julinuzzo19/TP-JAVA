@@ -10,7 +10,7 @@ import com.api.repository.RoleRepository;
 import com.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.io.*;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -25,12 +25,13 @@ public class UserService {
                        RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+
         //createRole();
     }
 
-    private void createRole() {
-        roleRepository.save(new Role("ADMIN"));
-    }
+    //private void createRole() {
+    //   roleRepository.save(new Role("ADMIN"));
+    // }
 
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -43,8 +44,11 @@ public class UserService {
         user.setLastName(request.getLastName());
         user.setPassword(request.getPassword());
         user.setActive(1);
-        Role userRole = roleRepository.findByRole("ADMIN");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        Role userRole = roleRepository.findByRole("USER");
+
+        System.out.println("Welcome");
+        System.out.println(userRole.getRole());
+        user.setRoles(new HashSet<Rfole>(Arrays.asList(userRole)));
         return userRepository.save(user);
     }
 

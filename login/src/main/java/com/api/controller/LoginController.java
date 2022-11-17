@@ -23,6 +23,7 @@ public class LoginController {
 
     @PostMapping(path="/login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest){
+
         return userService.login(loginRequest);
     }
 
@@ -30,6 +31,7 @@ public class LoginController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully"),
             @ApiResponse(code = 406, message = "You are not able to create user")})
+
     @PostMapping(path = "/registration")
     public ResponseEntity<Void> createNewUser(@RequestBody CreateUserRequest request) {
         User userExists = userService.findUserByEmail(request.getEmail());
