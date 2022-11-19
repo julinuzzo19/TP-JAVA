@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="505649f7-dbd1-432a-8edb-89051889d980" name="Changes" comment="" />
+    <list default="true" id="505649f7-dbd1-432a-8edb-89051889d980" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/login/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/login/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,7 +46,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.grazie",
+    "settings.editor.selected.configurable": "preferences.keymap",
     "spring.configuration.checksum": "821f03288846297c2cf43c34766a38f7"
   }
 }]]></component>
@@ -90,7 +94,8 @@
       <updated>1668457759518</updated>
       <workItem from="1668457771485" duration="5709000" />
       <workItem from="1668654463756" duration="78000" />
-      <workItem from="1668654569394" duration="3307000" />
+      <workItem from="1668654569394" duration="3453000" />
+      <workItem from="1668871629351" duration="553000" />
     </task>
     <servers />
   </component>
