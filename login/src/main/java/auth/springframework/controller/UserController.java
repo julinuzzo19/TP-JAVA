@@ -1,6 +1,8 @@
 package auth.springframework.controller;
 
 import auth.springframework.config.IJwtGenerator;
+import auth.springframework.dtos.LoginDTO;
+import auth.springframework.dtos.RegisterDTO;
 import auth.springframework.exception.UserNotFoundException;
 import auth.springframework.model.User;
 import auth.springframework.service.IUserService;
@@ -20,9 +22,10 @@ public class UserController {
         this.userService=userService;
         this.jwtGenerator=jwtGenerator;
     }
-
+    //swagger doc
+    // http://localhost:8081/swagger-ui/index.html#/
     @PostMapping("/register")
-    public ResponseEntity<?> postUser(@RequestBody User user){
+    public ResponseEntity<?> postUser(@RequestBody RegisterDTO user){
         try{
             userService.saveUser(user);
             return new ResponseEntity<>(user, HttpStatus.CREATED);
@@ -32,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody User user) {
+    public ResponseEntity<?> loginUser(@RequestBody LoginDTO user) {
         try {
             if(user.getEmail() == null || user.getPassword() == null) {
                 throw new UserNotFoundException("UserName or Password is Empty");
@@ -41,7 +44,7 @@ public class UserController {
             if(userData == null){
                 throw new UserNotFoundException("UserName or Password is Invalid");
             }
-            return new ResponseEntity<>(jwtGenerator.generateToken(user), HttpStatus.OK);
+            return new ResponseEntity<>(jwtGenerator.generateToken(userData), HttpStatus.OK);
         } catch (UserNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
         }

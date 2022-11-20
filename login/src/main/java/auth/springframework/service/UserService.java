@@ -1,5 +1,6 @@
 package auth.springframework.service;
 
+import auth.springframework.dtos.RegisterDTO;
 import auth.springframework.exception.UserNotFoundException;
 import auth.springframework.model.User;
 import auth.springframework.repository.UserRepository;
@@ -17,10 +18,15 @@ public class UserService implements IUserService {
         this.userRepository=userRepository;
     }
     @Override
-    public void saveUser(User user) {
-        User data=user;
-        data.setActive(1);
-        userRepository.save(data);
+    public void saveUser(RegisterDTO userDTO) {
+        User newUser = new User();
+        newUser.setEmail(userDTO.getEmail());
+        newUser.setName(userDTO.getName());
+        newUser.setPassword(userDTO.getPassword());
+        newUser.setLastName(userDTO.getLastName());
+        newUser.setActive(1);
+
+        userRepository.save(newUser);
     }
 
     @Override
