@@ -16,6 +16,16 @@
 *.iml
 *.ipr
 swagger.json
+ .idea/TP-JAVA.iml
+ .idea/encodings.xml
+ .idea/jarRepositories.xml
+ .idea/jpa-buddy.xml
+ .idea/libraries/
+ .idea/misc.xml
+ .idea/modules.xml
+ .idea/vcs.xml
+ target/
+
 
 ### NetBeans ###
 /nbproject/private/
