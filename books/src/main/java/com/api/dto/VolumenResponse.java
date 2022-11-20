@@ -27,7 +27,7 @@ public class VolumenResponse {
      Object allowAnonLogging;
      Object contentVersion;
      Object panelizationSummary;
-     Object imageLinks;
+     ImagenClass imageLinks;
      String canonicalVolumeLink;
      Object saleInfo;
      Object accessInfo;
