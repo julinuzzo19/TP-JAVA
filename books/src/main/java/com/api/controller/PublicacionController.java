@@ -1,16 +1,13 @@
 package com.api.controller;
 
-import com.api.dto.BusquedaLibroResponse;
-import com.api.dto.ComentarioDTO;
-import com.api.dto.DespublicarDTO;
-import com.api.model.Comentario;
+import com.api.dto.*;
 import com.api.service.LibrosService;
+import com.api.service.AnalizarOpinionService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import com.api.model.Publicacion;
-import com.api.dto.Libro;
 import com.api.service.PublicacionService;
 
 import java.io.IOException;
@@ -18,8 +15,8 @@ import java.util.List;
 
 
 @RestController
-@Api(value="libros", description="operacion para buscar libros")
-public class LibroController {
+@Api(value="publicacion", description="operacion para buscar libros y compartirlos en una publicacion")
+public class PublicacionController {
 
     private LibrosService librosService;
 
@@ -31,37 +28,47 @@ public class LibroController {
     }
 
     @Autowired
-    public LibroController( LibrosService librosService, PublicacionService publicService ) {
+    public PublicacionController(LibrosService librosService, PublicacionService publicService, AnalizarOpinionService analizarService) {
         this.librosService = librosService;
         this.publicService = publicService;
     }
 
+    /*metodo para realizar la busqueda de libro mediante algun texto*/
      @RequestMapping(value="/buscarLibros/{textoBusqueda}", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
-    public List<Libro> registration(@PathVariable String textoBusqueda)throws IOException {
+    public List<Libro> buscarLibros(@PathVariable String textoBusqueda)throws IOException {
          List<Libro> resultado = librosService.buscadorLibro(textoBusqueda);
         return resultado;
     }
 
+    /*metodo para publicar el libro encontrado agregandole una opinion*/
     @RequestMapping(value="/publicar/{opinion}", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
     public Publicacion guardarPublicacion(@RequestBody Libro libro, @PathVariable String opinion)throws IOException {
         Publicacion publicacion = publicService.savePublicacion(libro, libro.uuidUser, opinion);
         return publicacion;
     }
-
+    /*
+        metodo para despublicar una publicacion, solo se hace una baja logica
+    * se le cambia de estado a despublicar
+    * */
     @RequestMapping(value="/despublicar", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
     public Boolean despublicar(@PathVariable DespublicarDTO publicacion )throws IOException {
         Boolean resultado = publicService.despublicar(publicacion);
         return resultado;
     }
-    @RequestMapping(value="/comentar", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
-    public Comentario comentarPublicacion(@RequestBody ComentarioDTO comentario)throws IOException {
-        Comentario publicacion = publicService.guardarComentario(comentario);
+
+    /*metodo para modificar la descripcion de la publicacion*/
+    @RequestMapping(value="/modificar/{idPublicacion}", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
+    public Publicacion modificarPublicacion(@PathVariable ModPublicacionDTO modPublic)throws IOException {
+        Publicacion resultado = publicService.modificarPublicacion(modPublic);
+        return resultado;
+    }
+
+    /*
+    * este metodo es para ver todas las publicaciones que esten publicadas de todos los usuario*/
+    @RequestMapping(value="/publicaciones", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<PublicacionCompleta> verPublicaciones()throws IOException {
+        List<PublicacionCompleta> publicacion = publicService.mostrarPublicaciones();
         return publicacion;
     }
 
-    @RequestMapping(value="/eliminarComentario", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
-    public Boolean despublicar(@RequestBody ComentarioDTO comentario )throws IOException {
-        Boolean resultado = publicService.eliminarComentario(comentario);
-        return resultado;
-    }
 }

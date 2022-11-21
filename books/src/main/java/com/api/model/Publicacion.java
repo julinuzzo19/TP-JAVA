@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "publicacion")
@@ -46,13 +45,13 @@ public class Publicacion {
     private String[] genero;
 
     @Column
-    private String opinionUsuario;
+    private String descripcion;
 
     public Publicacion() {
     }
 
     public Publicacion(String isbn, String[] genero, String titulo, String autor,String imagen
-    ,String estado, String edicion, String uuidUsuario, String linkLibro, String resumen, String opinionUsuario) {
+    ,String estado, String edicion, String uuidUsuario, String linkLibro, String resumen, String descripcion) {
         this.genero = genero;
         this.isbn = isbn;
         this.titulo = titulo;
@@ -63,6 +62,6 @@ public class Publicacion {
         this.linkLibro = linkLibro;
         this.uuidUsuario = uuidUsuario;
         this.resumen = resumen;
-        this.opinionUsuario = opinionUsuario;
+        this.descripcion = descripcion;
     }
 }

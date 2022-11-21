@@ -18,6 +18,7 @@ public class Comentario {
     private String comentario;
     private int idPublicacion;
     private String uuidUsuario;
+    private boolean eliminado;
 
     public Comentario() {
     }
@@ -26,7 +27,7 @@ public class Comentario {
         this.comentario= comentario;
         this.idPublicacion = idPublicacion;
         this.uuidUsuario = uuidUsuario;
-
+        this.eliminado = false;
     }
 
 }
