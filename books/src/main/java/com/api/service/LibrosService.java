@@ -67,10 +67,14 @@ public class LibrosService {
             libro.setAutor(i.getVolumeInfo().getAuthors());
             libro.setResumen(i.getVolumeInfo().getDescription());
             libro.setIsbn(String.valueOf(i.getVolumeInfo().getIndustryIdentifiers().get(0)));
-            libro.setGenero(i.getVolumeInfo().getCategories().toArray(new String[0]));
-            libro.setImagen(i.getVolumeInfo().getImageLinks().getThumbnail());
             libro.setLinkLibro(i.getVolumeInfo().getInfoLink());
             libro.setEdicion(i.getVolumeInfo().getPublishedDate()+" "+ i.getVolumeInfo().getPublisher());
+            if(i.getVolumeInfo().getImageLinks() != null){
+                libro.setImagen(i.getVolumeInfo().getImageLinks().getThumbnail());
+            }
+            if(i.getVolumeInfo().getCategories() != null){
+                libro.setGenero(i.getVolumeInfo().getCategories().toArray(new String[0]));
+            }
             respuesta.add(libro);
         }
         return respuesta;

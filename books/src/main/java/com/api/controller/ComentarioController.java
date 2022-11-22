@@ -23,10 +23,6 @@ public class ComentarioController {
 
     private AnalizarOpinionService analizarService;
 
-    @RequestMapping(value="/info", method = RequestMethod.GET)
-    public String info()throws IOException {
-        return "prueba info";
-    }
 
     @Autowired
     public ComentarioController(LibrosService librosService, PublicacionService publicService, AnalizarOpinionService analizarService) {
@@ -53,7 +49,7 @@ public class ComentarioController {
     }
 
     /*metodo para modificar la descripcion del comentaroio*/
-    @RequestMapping(value="/modificar/{idPublicacion}", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/modificarComentario", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
     public Comentario modificarComentario(@PathVariable ModPublicacionDTO modComentario)throws IOException {
         Comentario resultado = publicService.modificarComentario(modComentario);
         return resultado;

@@ -142,11 +142,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-         <dependency>
-            <groupId>alekcz</groupId>
-            <artifactId>googlecredentials</artifactId>
-            <version>3.0.1</version>
-        </dependency>
     </dependencies>
 
 

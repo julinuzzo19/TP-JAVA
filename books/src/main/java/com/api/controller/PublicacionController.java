@@ -57,7 +57,7 @@ public class PublicacionController {
     }
 
     /*metodo para modificar la descripcion de la publicacion*/
-    @RequestMapping(value="/modificar/{idPublicacion}", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/modificarPublicacion/{idPublicacion}", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
     public Publicacion modificarPublicacion(@PathVariable ModPublicacionDTO modPublic)throws IOException {
         Publicacion resultado = publicService.modificarPublicacion(modPublic);
         return resultado;
