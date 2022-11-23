@@ -3,7 +3,7 @@ package com.api.controller;
 import com.api.dto.*;
 import com.api.service.LibrosService;
 import com.api.service.AnalizarOpinionService;
-import io.swagger.annotations.Api;
+//import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@Api(value="publicacion", description="operacion para buscar libros y compartirlos en una publicacion")
+//@Api(value="publicacion", description="operacion para buscar libros y compartirlos en una publicacion")
 public class PublicacionController {
 
     private LibrosService librosService;

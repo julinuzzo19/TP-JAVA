@@ -5,7 +5,7 @@ import com.api.model.Comentario;
 import com.api.service.AnalizarOpinionService;
 import com.api.service.LibrosService;
 import com.api.service.PublicacionService;
-import io.swagger.annotations.Api;
+//import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.io.IOException;
 
 
 @RestController
-@Api(value="Comentario", description="operacion para hacer comentario en una publicacion")
+//@Api(value="Comentario", description="operacion para hacer comentario en una publicacion")
 public class ComentarioController {
 
     private LibrosService librosService;
