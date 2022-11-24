@@ -23,8 +23,9 @@ public class PublicacionController {
     private PublicacionService publicService;
 
     @RequestMapping(value="/info", method = RequestMethod.GET)
-    public String info()throws IOException {
-        return "prueba info";
+    public String info(@RequestAttribute String user_id)throws IOException {
+
+        return "prueba 2"+user_id;
     }
 
     @Autowired
