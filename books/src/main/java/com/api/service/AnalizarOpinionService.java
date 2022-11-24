@@ -12,7 +12,7 @@ import java.io.FileInputStream;
 @Service("analizarOpinionService")
 public class AnalizarOpinionService {
 
-    private static final String CREDENTIALS_FILE_PATH = "C:\\Users\\User\\Desktop\\aplicJava\\TP-JAVA\\books\\src\\main\\java\\com\\api\\service\\credencial.json";
+    private static final String CREDENTIALS_FILE_PATH = "C:\\Users\\User\\Desktop\\Nueva carpeta\\TP-JAVA\\books\\src\\main\\java\\com\\api\\service\\credencial.json";
     /** en este path hay que poner la ruta local*/
     /** Detects sentiments from the string {@code text}. */
     public Sentiment analyzeSentimentText(String text, String lang) throws Exception {
