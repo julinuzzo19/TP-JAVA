@@ -9,6 +9,5 @@ import java.util.Optional;
 @Getter
 public class ModPublicacionDTO {
     int idPublicacion;
-    String uuidUsuario;
     String descripcion;
 }

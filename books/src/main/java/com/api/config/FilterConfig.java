@@ -20,7 +20,7 @@ public class FilterConfig {
         //filter.addUrlPatterns("/comentarios/modificarComentario");
         //filter.addUrlPatterns("/info");
         */
-        filter.addUrlPatterns("/comentarios/*","/info","/publicar/*","/despublicar","/modificarPublicacion/*");
+        filter.addUrlPatterns("/comentarios/*","/info","/publicar/*","/despublicar/*","/modificarPublicacion/*","/publicacionesUsuario");
 
         return filter;
     }

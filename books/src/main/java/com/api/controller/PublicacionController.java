@@ -51,17 +51,15 @@ public class PublicacionController {
     @RequestMapping(value="/publicar/{opinion}", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
     public Publicacion guardarPublicacion(@RequestAttribute String user_id,@RequestBody Libro libro, @PathVariable String opinion)throws IOException {
         Publicacion publicacion = publicService.savePublicacion(libro,user_id, opinion);
-
         return publicacion;
     }
     /*
         metodo para despublicar una publicacion, solo se hace una baja logica
     * se le cambia de estado a despublicar
     * */
-    @RequestMapping(value="/despublicar", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
-    public Boolean despublicar(@RequestAttribute String user_id,@PathVariable DespublicarDTO publicacion )throws IOException {
-        publicacion.setUser_id(user_id);
-        Boolean resultado = publicService.despublicar(publicacion);
+    @RequestMapping(value="/despublicar/{idPublicacion}", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
+    public Boolean despublicar(@PathVariable String idPublicacion,@RequestAttribute String user_id)throws IOException {
+        Boolean resultado = publicService.despublicar(idPublicacion,user_id);
         System.out.print(user_id);
         return resultado;
     }
@@ -69,10 +67,7 @@ public class PublicacionController {
     /*metodo para modificar la descripcion de la publicacion*/
     @RequestMapping(value="/modificarPublicacion/{idPublicacion}", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
     public Publicacion modificarPublicacion(@RequestAttribute String user_id,@PathVariable ModPublicacionDTO modPublic)throws IOException {
-        modPublic.setUuidUsuario(user_id);
-        Publicacion resultado = publicService.modificarPublicacion(modPublic);
-
-
+        Publicacion resultado = publicService.modificarPublicacion(modPublic,user_id);
         return resultado;
     }
 
@@ -81,6 +76,12 @@ public class PublicacionController {
     @RequestMapping(value="/publicaciones", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
     public List<PublicacionCompleta> verPublicaciones()throws IOException {
         List<PublicacionCompleta> publicacion = publicService.mostrarPublicaciones();
+        return publicacion;
+    }
+
+    @RequestMapping(value="/publicacionesUsuario", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    public List<PublicacionCompleta> verPublicaciones(@RequestAttribute String user_id)throws IOException {
+        List<PublicacionCompleta> publicacion = publicService.verPublicacionUsuario(user_id);
         return publicacion;
     }
 

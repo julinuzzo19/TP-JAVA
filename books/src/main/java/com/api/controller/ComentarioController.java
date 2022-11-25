@@ -45,16 +45,15 @@ public class ComentarioController {
 * falta terminar la logica
 * */
     @RequestMapping(value="/eliminarComentario/{idComentario}", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
-    public Boolean eliminarComentario(@RequestBody String uuid, @PathVariable String idComentario,@RequestAttribute String user_id)throws IOException {
-        Boolean resultado = publicService.eliminarComentario(uuid, idComentario);
+    public Boolean eliminarComentario(@PathVariable String idComentario,@RequestAttribute String user_id)throws IOException {
+        Boolean resultado = publicService.eliminarComentario(user_id, idComentario);
         return resultado;
     }
 
     /*metodo para modificar la descripcion del comentaroio*/
     @RequestMapping(value="/modificarComentario", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
-    public Comentario modificarComentario(@PathVariable ModPublicacionDTO modComentario,@RequestAttribute String user_id)throws IOException {
-        modComentario.setUuidUsuario(user_id);
-        Comentario resultado = publicService.modificarComentario(modComentario);
+    public Comentario modificarComentario(@RequestBody ModPublicacionDTO modComentario,@RequestAttribute String user_id)throws IOException {
+        Comentario resultado = publicService.modificarComentario(modComentario, user_id);
         return resultado;
     }
 //    @RequestMapping(value="/analizarComentario/{opinion}", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)

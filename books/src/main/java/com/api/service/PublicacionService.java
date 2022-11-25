@@ -33,10 +33,10 @@ public class PublicacionService {
         return pu;
     }
 
-    public Boolean despublicar(DespublicarDTO publicacion) {
-        Optional<Publicacion> publi = this.publiRepository.findById(publicacion.getIdPublicacion());
+    public Boolean despublicar(String idpublicacion, String user_id) {
+        Optional<Publicacion> publi = this.publiRepository.findById(Integer.valueOf(idpublicacion));
         String usuario = publi.get().getUuidUsuario();
-        if(usuario.equals(publicacion.getUser_id())){
+        if(usuario.equals(user_id)){
             publi.get().setEstado("despublicado");
             this.publiRepository.save(publi.get());
             return true;
@@ -98,23 +98,42 @@ public class PublicacionService {
         return result;
     }
 
-    public Publicacion modificarPublicacion(ModPublicacionDTO modPublic) {
+    public Publicacion modificarPublicacion(ModPublicacionDTO modPublic, String user_id) {
         Optional<Publicacion> publi = this.publiRepository.findById(Integer.valueOf(modPublic.getIdPublicacion()));
         String usuario = publi.get().getUuidUsuario();
-        if(usuario.equals(modPublic.getUuidUsuario())){
+        if(usuario.equals(user_id)){
             publi.get().setDescripcion(modPublic.getDescripcion());
            return this.publiRepository.save(publi.get());
         }
         return null;
     }
 
-    public Comentario modificarComentario(ModPublicacionDTO modComentario) {
+    public Comentario modificarComentario(ModPublicacionDTO modComentario, String user_id) {
         Optional<Comentario> comen = this.comentRepository.findById(modComentario.getIdPublicacion());
         Comentario coment = new Comentario();
-        if (modComentario.getUuidUsuario().equals(comen.get().getUser_id())){
+        if (user_id.equals(comen.get().getUser_id())){
             comen.get().setComentario(modComentario.getDescripcion());
             coment =  this.comentRepository.save(comen.get());
         }
         return coment;
+    }
+
+    public List<PublicacionCompleta> verPublicacionUsuario(String user_id) {
+        List<Publicacion> publicaciones = this.publiRepository.findByUuidUsuario(user_id);
+        List<PublicacionCompleta> publis = new ArrayList<PublicacionCompleta>();
+        for(Publicacion i : publicaciones){
+            if(i.getEstado().equals("publicado")){
+                PublicacionCompleta publicCompl = new PublicacionCompleta();
+                publicCompl.setPublicacion(i);
+                List<Comentario> comentarios = this.comentRepository.findByIdPublicacion(i.getId());
+                List<Comentario> comentariosBuenos = new ArrayList<Comentario>();
+                for(Comentario c : comentarios){
+                    comentariosBuenos.add(c);
+                }
+                publicCompl.setComentarios(comentariosBuenos);
+                publis.add(publicCompl);
+            }
+        }
+        return publis;
     }
 }
