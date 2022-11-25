@@ -14,7 +14,7 @@ import java.io.IOException;
 
 
 @RestController
-//@Api(value="Comentario", description="operacion para hacer comentario en una publicacion")
+@RequestMapping("/comentarios")
 public class ComentarioController {
 
     private LibrosService librosService;
@@ -33,7 +33,7 @@ public class ComentarioController {
 
     /*metodo para agregar comentario a una publicacion*/
     @RequestMapping(value="/comentar", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
-    public Comentario comentarPublicacion(@RequestBody ComentarioDTO comentario)throws IOException {
+    public Comentario comentarPublicacion(@RequestBody ComentarioDTO comentario,@RequestAttribute String user_id)throws IOException {
         Comentario publicacion = publicService.guardarComentario(comentario);
         return publicacion;
     }
@@ -43,14 +43,14 @@ public class ComentarioController {
 * falta terminar la logica
 * */
     @RequestMapping(value="/eliminarComentario/{idComentario}", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
-    public Boolean eliminarComentario(@RequestBody String uuid, @PathVariable String idComentario)throws IOException {
+    public Boolean eliminarComentario(@RequestBody String uuid, @PathVariable String idComentario,@RequestAttribute String user_id)throws IOException {
         Boolean resultado = publicService.eliminarComentario(uuid, idComentario);
         return resultado;
     }
 
     /*metodo para modificar la descripcion del comentaroio*/
     @RequestMapping(value="/modificarComentario", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
-    public Comentario modificarComentario(@PathVariable ModPublicacionDTO modComentario)throws IOException {
+    public Comentario modificarComentario(@PathVariable ModPublicacionDTO modComentario,@RequestAttribute String user_id)throws IOException {
         Comentario resultado = publicService.modificarComentario(modComentario);
         return resultado;
     }

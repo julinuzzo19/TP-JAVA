@@ -12,10 +12,10 @@ import com.api.service.PublicacionService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 
 @RestController
-//@Api(value="publicacion", description="operacion para buscar libros y compartirlos en una publicacion")
 public class PublicacionController {
 
     private LibrosService librosService;
@@ -25,7 +25,7 @@ public class PublicacionController {
     @RequestMapping(value="/info", method = RequestMethod.GET)
     public String info(@RequestAttribute String user_id)throws IOException {
 
-        return "prueba 2"+user_id;
+        return user_id;
     }
 
     @Autowired
@@ -43,8 +43,10 @@ public class PublicacionController {
 
     /*metodo para publicar el libro encontrado agregandole una opinion*/
     @RequestMapping(value="/publicar/{opinion}", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
-    public Publicacion guardarPublicacion(@RequestBody Libro libro, @PathVariable String opinion)throws IOException {
+    public Publicacion guardarPublicacion(@RequestAttribute String user_id,@RequestBody Libro libro, @PathVariable String opinion)throws IOException {
         Publicacion publicacion = publicService.savePublicacion(libro, libro.uuidUser, opinion);
+
+        System.out.print(user_id);
         return publicacion;
     }
     /*
