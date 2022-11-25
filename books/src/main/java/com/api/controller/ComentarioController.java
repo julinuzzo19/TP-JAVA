@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Optional;
 
 
 @RestController
@@ -34,6 +35,7 @@ public class ComentarioController {
     /*metodo para agregar comentario a una publicacion*/
     @RequestMapping(value="/comentar", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
     public Comentario comentarPublicacion(@RequestBody ComentarioDTO comentario,@RequestAttribute String user_id)throws IOException {
+        comentario.setUser_id((user_id));
         Comentario publicacion = publicService.guardarComentario(comentario);
         return publicacion;
     }
@@ -51,6 +53,7 @@ public class ComentarioController {
     /*metodo para modificar la descripcion del comentaroio*/
     @RequestMapping(value="/modificarComentario", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
     public Comentario modificarComentario(@PathVariable ModPublicacionDTO modComentario,@RequestAttribute String user_id)throws IOException {
+        modComentario.setUuidUsuario(user_id);
         Comentario resultado = publicService.modificarComentario(modComentario);
         return resultado;
     }

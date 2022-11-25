@@ -1,6 +1,5 @@
 package com.api.service;
 
-
 import com.api.dto.*;
 import com.api.model.Comentario;
 import com.api.repository.ComentarioRepository;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.api.repository.PublicacionRepository;
 import com.api.model.Publicacion;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +36,7 @@ public class PublicacionService {
     public Boolean despublicar(DespublicarDTO publicacion) {
         Optional<Publicacion> publi = this.publiRepository.findById(publicacion.getIdPublicacion());
         String usuario = publi.get().getUuidUsuario();
-        if(usuario.equals(publicacion.getUuidUsuario())){
+        if(usuario.equals(publicacion.getUser_id())){
             publi.get().setEstado("despublicado");
             this.publiRepository.save(publi.get());
             return true;
@@ -48,7 +46,7 @@ public class PublicacionService {
     }
 
     public Comentario guardarComentario(ComentarioDTO comentario) {
-        Comentario comen = this.comentRepository.save(new Comentario(comentario.getComentario(), comentario.getIdPublicacion(), comentario.getUuidUsuario()));
+        Comentario comen = this.comentRepository.save(new Comentario(comentario.getComentario(), comentario.getIdPublicacion(), comentario.getUser_id()));
         return comen;
     }
 
@@ -56,7 +54,7 @@ public class PublicacionService {
         Optional<Comentario> comen = this.comentRepository.findById(Integer.valueOf(idcomentario));
         Comentario coment = new Comentario();
         /*elimina el comentario si es el duenio del comentario o el el duenio de la publicacion*/
-        if (uuid.equals(comen.get().getUuidUsuario())){
+        if (uuid.equals(comen.get().getUser_id())){
             comen.get().setEliminado(true);
             coment =  this.comentRepository.save(comen.get());
         } else if (uuid.equals(this.publiRepository.findById(comen.get().getIdPublicacion()))) {
@@ -113,7 +111,7 @@ public class PublicacionService {
     public Comentario modificarComentario(ModPublicacionDTO modComentario) {
         Optional<Comentario> comen = this.comentRepository.findById(modComentario.getIdPublicacion());
         Comentario coment = new Comentario();
-        if (modComentario.getUuidUsuario().equals(comen.get().getUuidUsuario())){
+        if (modComentario.getUuidUsuario().equals(comen.get().getUser_id())){
             comen.get().setComentario(modComentario.getDescripcion());
             coment =  this.comentRepository.save(comen.get());
         }
