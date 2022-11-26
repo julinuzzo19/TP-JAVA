@@ -26,31 +26,49 @@ public class PublicacionService {
     private AnalizarOpinionService analizarService;
 
     public Publicacion savePublicacion(PublicarDTO libro, String uuidUsuario){
-
+        try{
         Publicacion publicacion = new Publicacion(libro.getIsbn(), libro.genero, libro.titulo, libro.autor.toString(),
                 libro.imagen,"publicado", libro.edicion, uuidUsuario, libro.linkLibro, libro.resumen, libro.getOpinion());
         Publicacion pu = this.publiRepository.save(publicacion);
         return pu;
+        }
+        catch(Exception e)
+        {
+        return null;
+        }
     }
 
     public Boolean despublicar(String idpublicacion, String user_id) {
+        try {
         Optional<Publicacion> publi = this.publiRepository.findById(Integer.valueOf(idpublicacion));
         String usuario = publi.get().getUuidUsuario();
         if(usuario.equals(user_id)){
             publi.get().setEstado("despublicado");
             this.publiRepository.save(publi.get());
             return true;
-        }else{
-            return false;
+        }
+            return null;
+        }
+        catch(Exception e)
+        {
+            return null;
         }
     }
 
-    public Comentario guardarComentario(ComentarioDTO comentario) {
-        Comentario comen = this.comentRepository.save(new Comentario(comentario.getComentario(), comentario.getIdPublicacion(), comentario.getUser_id()));
-        return comen;
+    public Comentario guardarComentario(ComentarioDTO comentario) throws IOException {
+        try {
+            Comentario comen = this.comentRepository.save(new Comentario(comentario.getComentario(), comentario.getIdPublicacion(), comentario.getUser_id()));
+            return comen;
+        }
+        catch (Exception e)
+        {
+           return null;
+        }
     }
 
     public Boolean eliminarComentario(String uuid,String idcomentario) {
+        try{
+
         Optional<Comentario> comen = this.comentRepository.findById(Integer.valueOf(idcomentario));
         Comentario coment = new Comentario();
         /*elimina el comentario si es el duenio del comentario o el el duenio de la publicacion*/
@@ -62,6 +80,10 @@ public class PublicacionService {
             coment =  this.comentRepository.save(comen.get());
         }
         return coment.isEliminado();
+        }
+        catch(Exception e){
+            return false;
+        }
     }
 
     public List<PublicacionCompleta> mostrarPublicaciones() throws IOException {
@@ -71,7 +93,7 @@ public class PublicacionService {
             if(i.getEstado().equals("publicado")){
                 PublicacionCompleta publicCompl = new PublicacionCompleta();
                 publicCompl.setPublicacion(i);
-                List<Comentario> comentarios = this.comentRepository.findByIdPublicacion(i.getId());
+                List<Comentario> comentarios = this.comentRepository.findByIdPublicacionAndEliminado(i.getId(),0);
                 List<Comentario> comentariosBuenos = new ArrayList<Comentario>();
                 for(Comentario c : comentarios){
                     float valor = this.analizarComentario(c.getComentario());
@@ -92,40 +114,59 @@ public class PublicacionService {
         try {
             resultado = analizarService.analyzeSentimentText(opinion,"es");
             result = resultado.getScore();
+            return result;
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return result;
+
     }
 
     public Publicacion modificarPublicacion(ModPublicacionDTO modPublic, String user_id) {
+        try{
+
         Optional<Publicacion> publi = this.publiRepository.findById(Integer.valueOf(modPublic.getIdPublicacion()));
         String usuario = publi.get().getUuidUsuario();
         if(usuario.equals(user_id)){
             publi.get().setDescripcion(modPublic.getDescripcion());
            return this.publiRepository.save(publi.get());
         }
-        return null;
+            return null;
+
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 
-    public Comentario modificarComentario(ModPublicacionDTO modComentario, String user_id) {
-        Optional<Comentario> comen = this.comentRepository.findById(modComentario.getIdPublicacion());
-        Comentario coment = new Comentario();
-        if (user_id.equals(comen.get().getUser_id())){
-            comen.get().setComentario(modComentario.getDescripcion());
-            coment =  this.comentRepository.save(comen.get());
+    public Comentario modificarComentario(ModComentarioDTO modComentario, String user_id, Integer comentarioId ) {
+
+        try {
+            Optional<Comentario> comen = this.comentRepository.findById(comentarioId);
+            Comentario coment = new Comentario();
+            if (user_id.equals(comen.get().getUser_id())) {
+                comen.get().setComentario(modComentario.getComentario());
+                coment = this.comentRepository.save(comen.get());
+            }
+            return coment;
         }
-        return coment;
+        catch (Exception e)
+        {
+            return null;
+        }
+
     }
 
     public List<PublicacionCompleta> verPublicacionUsuario(String user_id) {
+        try{
         List<Publicacion> publicaciones = this.publiRepository.findByUuidUsuario(user_id);
         List<PublicacionCompleta> publis = new ArrayList<PublicacionCompleta>();
         for(Publicacion i : publicaciones){
             if(i.getEstado().equals("publicado")){
                 PublicacionCompleta publicCompl = new PublicacionCompleta();
                 publicCompl.setPublicacion(i);
-                List<Comentario> comentarios = this.comentRepository.findByIdPublicacion(i.getId());
+                List<Comentario> comentarios = this.comentRepository.findByIdPublicacionAndEliminado(i.getId(),0);
                 List<Comentario> comentariosBuenos = new ArrayList<Comentario>();
                 for(Comentario c : comentarios){
                     comentariosBuenos.add(c);
@@ -134,6 +175,10 @@ public class PublicacionService {
                 publis.add(publicCompl);
             }
         }
-        return publis;
+        return publis;}
+        catch(Exception e)
+        {
+            return null;
+        }
     }
 }

@@ -6,13 +6,18 @@ import com.api.service.AnalizarOpinionService;
 //import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import javassist.NotFoundException;
+import javassist.tools.web.BadHttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.api.model.Publicacion;
 import com.api.service.PublicacionService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,12 +31,6 @@ public class PublicacionController {
     private PublicacionService publicService;
 
 
-    @RequestMapping(value="/info", method = RequestMethod.GET)
-    public String info(@RequestAttribute String user_id)throws IOException {
-
-        return user_id;
-    }
-
     @Autowired
     public PublicacionController(LibrosService librosService, PublicacionService publicService, AnalizarOpinionService analizarService) {
         this.librosService = librosService;
@@ -40,49 +39,131 @@ public class PublicacionController {
 
     /*metodo para realizar la busqueda de libro mediante algun texto*/
      @RequestMapping(value="/buscarLibros/{textoBusqueda}", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
-    public List<Libro> buscarLibros(@PathVariable String textoBusqueda)throws IOException {
+    public ResponseEntity<Object> buscarLibros(@PathVariable String textoBusqueda) {
 
+    try{
          List<Libro> resultado = librosService.buscadorLibro(textoBusqueda);
 
-        return resultado;
+         if (resultado.size() > 0 )
+         {
+             return new ResponseEntity<>(resultado, HttpStatus.OK);
+         }
+
+         throw new NotFoundException("No se han encontrado libros con esa busqueda");
+
+     }
+        catch (NotFoundException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+    }
+        catch (Exception e){
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
     }
 
     /*metodo para publicar el libro encontrado agregandole una opinion*/
     @RequestMapping(value="/publicar", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
-    public Publicacion guardarPublicacion(@RequestAttribute String user_id,@RequestBody PublicarDTO publicacionBody)throws IOException {
+    public ResponseEntity<?> guardarPublicacion(@RequestAttribute String user_id,@RequestBody PublicarDTO publicacionBody)throws IOException {
+        try {
         Publicacion publicacion = publicService.savePublicacion(publicacionBody,user_id);
-        return publicacion;
+        if (publicacion != null)
+        {
+            return new ResponseEntity<>(publicacion, HttpStatus.OK);
+        }
+        throw new BadHttpRequest();
+
+    }
+        catch (BadHttpRequest e){
+        return new ResponseEntity<>("No se ha podido publicar correctamente", HttpStatus.BAD_REQUEST);
+    }
+        catch (Exception e){
+        return new ResponseEntity<>("Error interno del servidor", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
     }
     /*
         metodo para despublicar una publicacion, solo se hace una baja logica
     * se le cambia de estado a despublicar
     * */
     @RequestMapping(value="/despublicar/{idPublicacion}", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
-    public Boolean despublicar(@PathVariable String idPublicacion,@RequestAttribute String user_id)throws IOException {
+    public ResponseEntity<?> despublicar(@PathVariable String idPublicacion, @RequestAttribute String user_id){
+    try {
         Boolean resultado = publicService.despublicar(idPublicacion,user_id);
-        System.out.print(user_id);
-        return resultado;
+
+        if (resultado)
+        {
+            return new ResponseEntity<>("Publicacion eliminada correctamente", HttpStatus.OK);
+        }
+
+        throw new BadHttpRequest();
+    }
+        catch (BadHttpRequest e){
+        return new ResponseEntity<>("No se ha podico eliminar la publicacion", HttpStatus.BAD_REQUEST);
+
+    }
+        catch (Exception e){
+        return new ResponseEntity<>("Error interno del servidor", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /*metodo para modificar la descripcion de la publicacion*/
     @RequestMapping(value="/modificarPublicacion/{idPublicacion}", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
-    public Publicacion modificarPublicacion(@RequestAttribute String user_id,@PathVariable ModPublicacionDTO modPublic)throws IOException {
+    public ResponseEntity<?> modificarPublicacion(@RequestAttribute String user_id,@RequestBody ModPublicacionDTO modPublic, @PathVariable Integer idPublicacion) {
+    try{
+        modPublic.setIdPublicacion(idPublicacion);
         Publicacion resultado = publicService.modificarPublicacion(modPublic,user_id);
-        return resultado;
+
+        if (resultado != null)
+        {
+            return new ResponseEntity<>(resultado, HttpStatus.OK);
+        }
+        throw new BadHttpRequest();
+    }
+        catch (BadHttpRequest e){
+        return new ResponseEntity<>("No se ha podido modificar la publicacion", HttpStatus.BAD_REQUEST);
+
+    }
+        catch (Exception e){
+        return new ResponseEntity<>("Error interno del servidor", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
     }
 
     /*
     * este metodo es para ver todas las publicaciones que esten publicadas de todos los usuario*/
     @RequestMapping(value="/publicaciones", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
-    public List<PublicacionCompleta> verPublicaciones()throws IOException {
+    public ResponseEntity<Object> verPublicaciones() {
+
+       try{
         List<PublicacionCompleta> publicacion = publicService.mostrarPublicaciones();
-        return publicacion;
+
+        if (publicacion.size() > 0 )
+        {
+            return new ResponseEntity<>(publicacion, HttpStatus.OK);
+        }
+
+        throw new NotFoundException("No se han encontrado publicaciones");
+    }
+        catch (NotFoundException e){
+            return new ResponseEntity<>( e.getMessage(), HttpStatus.NOT_FOUND);
+    }
+        catch (Exception e){
+        return new ResponseEntity<>("Error interno del servidor", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
     }
 
-    @RequestMapping(value="/publicacionesUsuario", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
-    public List<PublicacionCompleta> verPublicaciones(@RequestAttribute String user_id)throws IOException {
-        List<PublicacionCompleta> publicacion = publicService.verPublicacionUsuario(user_id);
-        return publicacion;
+    @RequestMapping(value="/publicaciones/{usuarioId}", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> verPublicaciones(@PathVariable String usuarioId) {
+        try{
+        List<PublicacionCompleta> publicacion = publicService.verPublicacionUsuario(usuarioId);
+        if (publicacion != null) {
+            return new ResponseEntity<>(publicacion, HttpStatus.OK);
+        }
+            throw new NotFoundException("No se han encontrado publicaciones del usuario");
+    }
+        catch (NotFoundException e){
+        return new ResponseEntity<>( e.getMessage(), HttpStatus.NOT_FOUND);
+    }
+        catch (Exception e){
+        return new ResponseEntity<>("Error interno del servidor", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
     }
 
 }

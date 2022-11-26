@@ -22,15 +22,14 @@ public class UserController {
         this.userService=userService;
         this.jwtGenerator=jwtGenerator;
     }
-    //swagger doc
-    // http://localhost:8081/swagger-ui/index.html#/
+
     @PostMapping("/register")
     public ResponseEntity<?> postUser(@RequestBody RegisterDTO user){
         try{
             userService.saveUser(user);
             return new ResponseEntity<>(user, HttpStatus.CREATED);
         } catch (Exception e){
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -46,7 +45,7 @@ public class UserController {
             }
             return new ResponseEntity<>(jwtGenerator.generateToken(userData), HttpStatus.OK);
         } catch (UserNotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }

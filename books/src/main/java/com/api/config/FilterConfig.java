@@ -12,7 +12,7 @@ public class FilterConfig {
         FilterRegistrationBean filter= new FilterRegistrationBean();
         filter.setFilter(new JwtFilter());
 
-        filter.addUrlPatterns("/comentarios/*","/info","/publicar","/despublicar/*","/modificarPublicacion/*","/publicacionesUsuario");
+        filter.addUrlPatterns("/comentarios/*","/info","/publicar","/despublicar/*","/modificarPublicacion/*");
 
         return filter;
     }

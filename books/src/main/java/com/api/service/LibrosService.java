@@ -51,12 +51,13 @@ public class LibrosService {
         try {
             libroEncontrados = mapper.readValue(result, BusquedaLibroResponse.class);
             respuesta = this.mapperLibro(libroEncontrados);
+
+            return respuesta;
+
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-         System.out.println(libroEncontrados);
 
-        return respuesta;
     }
 
     public List<Libro> mapperLibro(BusquedaLibroResponse response){
