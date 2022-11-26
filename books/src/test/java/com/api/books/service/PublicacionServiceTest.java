@@ -77,13 +77,14 @@ public class PublicacionServiceTest {
     public void testSavePublicacion() {
         // Setup
         final String userId = "0650bcfd-d74c-40f8-a927-40871ff742cb";
+        String opinion = "el libro esta bueno";
+
         PublicarDTO publicar = new PublicarDTO("1c392b1d","Harry Potter and the philosopher's stone",new ArrayList<String>(Collections.singleton("J. K. Rowling"))
                 ,"http://books.google.com.ar/books?id=p3QQjwEACAAJ&dq=harrypotter&hl=&source=gbs_api"
                 ,"2010","http://books.google.com/books/content?id=p3QQjwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
                 ,"Harry Potter se ha quedado huérfano y vive en casa de sus abominables tíos y del insoportable primo Dudley. Harry se siente muy triste y solo, hasta que un buen día recibe una carta que cambiará su vida para siempre. En ella le comunican que ha sido aceptado como alumno en el colegio interno Hogwarts de magia y hechicería. A partir de ese momento, la suerte de Harry da un vuelco espectacular"
-                , new String[]{"genero"});
+                , new String[]{"genero"},opinion);
 
-        String opinion = "el libro esta bueno";
         // Run the test
         Publicacion result = publicacionServiceTest.savePublicacion(publicar,userId);
 
