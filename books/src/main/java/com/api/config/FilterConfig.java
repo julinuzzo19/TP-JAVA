@@ -11,16 +11,8 @@ public class FilterConfig {
     public FilterRegistrationBean jwtFilter() {
         FilterRegistrationBean filter= new FilterRegistrationBean();
         filter.setFilter(new JwtFilter());
-      /*
-        //filter.addUrlPatterns("/publicar");
-       // filter.addUrlPatterns("/despublicar");
-       // filter.addUrlPatterns("/modificarPublicacion/");
 
-        //filter.addUrlPatterns("/comentarios/eliminarComentario/");
-        //filter.addUrlPatterns("/comentarios/modificarComentario");
-        //filter.addUrlPatterns("/info");
-        */
-        filter.addUrlPatterns("/comentarios/*","/info","/publicar/*","/despublicar/*","/modificarPublicacion/*","/publicacionesUsuario");
+        filter.addUrlPatterns("/comentarios/*","/info","/publicar","/despublicar/*","/modificarPublicacion/*","/publicacionesUsuario");
 
         return filter;
     }

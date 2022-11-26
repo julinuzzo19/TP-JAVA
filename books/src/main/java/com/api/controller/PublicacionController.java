@@ -48,9 +48,9 @@ public class PublicacionController {
     }
 
     /*metodo para publicar el libro encontrado agregandole una opinion*/
-    @RequestMapping(value="/publicar/{opinion}", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
-    public Publicacion guardarPublicacion(@RequestAttribute String user_id,@RequestBody Libro libro, @PathVariable String opinion)throws IOException {
-        Publicacion publicacion = publicService.savePublicacion(libro,user_id, opinion);
+    @RequestMapping(value="/publicar", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
+    public Publicacion guardarPublicacion(@RequestAttribute String user_id,@RequestBody PublicarDTO publicacionBody)throws IOException {
+        Publicacion publicacion = publicService.savePublicacion(publicacionBody,user_id);
         return publicacion;
     }
     /*

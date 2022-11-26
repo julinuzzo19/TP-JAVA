@@ -25,10 +25,10 @@ public class PublicacionService {
     @Autowired
     private AnalizarOpinionService analizarService;
 
-    public Publicacion savePublicacion(Libro libro, String uuidUsuario, String opinion){
+    public Publicacion savePublicacion(PublicarDTO libro, String uuidUsuario){
 
         Publicacion publicacion = new Publicacion(libro.getIsbn(), libro.genero, libro.titulo, libro.autor.toString(),
-                libro.imagen,"publicado", libro.edicion, uuidUsuario, libro.linkLibro, libro.resumen, opinion);
+                libro.imagen,"publicado", libro.edicion, uuidUsuario, libro.linkLibro, libro.resumen, libro.getOpinion());
         Publicacion pu = this.publiRepository.save(publicacion);
         return pu;
     }
