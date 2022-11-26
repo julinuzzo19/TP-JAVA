@@ -92,4 +92,60 @@ public class User {
         this.active = active;
     }
 
+    public static Builder builder(){
+        return new Builder();
+    }
+
+    public static class Builder{
+        private int id;
+        private String email;
+        private String password;
+        private String name;
+        private String lastName;
+        private int active;
+
+        public Builder id(int id){
+            this.id = id;
+            return this;
+        }
+
+
+        public Builder email(String email){
+            this.email = email;
+            return this;
+        }
+
+        @Override
+        public String toString() {
+            return "Builder{" +
+                    "id=" + id +
+                    ", email='" + email + '\'' +
+                    ", password='" + password + '\'' +
+                    ", name='" + name + '\'' +
+                    ", lastName='" + lastName + '\'' +
+                    ", active=" + active +
+                    '}';
+        }
+
+        public Builder password(String password){
+            this.password = password;
+            return this;
+        }
+        public Builder name(String name){
+            this.name = name;
+            return this;
+        }
+        public Builder lastName(String lastName){
+            this.lastName = lastName;
+            return this;
+        }
+        public Builder active(int active){
+            this.active = active;
+            return this;
+        }
+
+        public User build(){
+            return new User( email, password, name, lastName, active);
+        }
+    }
 }

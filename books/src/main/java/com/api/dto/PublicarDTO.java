@@ -29,4 +29,10 @@ public class PublicarDTO {
     public String opinion;
 
     //public String uuidUser;
+
+    public PublicarDTO(){}
+    public PublicarDTO(String s, String s1, List<String> autors, String s3, String s4, String s5, String s6, String[] strings) {
+        this.autor = autors;
+    }
+
 }

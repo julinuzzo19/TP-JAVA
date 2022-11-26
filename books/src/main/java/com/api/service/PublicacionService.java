@@ -25,6 +25,12 @@ public class PublicacionService {
     @Autowired
     private AnalizarOpinionService analizarService;
 
+    public PublicacionService(PublicacionRepository publicacionRepository, ComentarioRepository comentRepository) {
+        this.publiRepository = publicacionRepository;
+        this.comentRepository = comentRepository;
+    }
+
+
     public Publicacion savePublicacion(PublicarDTO libro, String uuidUsuario){
         try{
         Publicacion publicacion = new Publicacion(libro.getIsbn(), libro.genero, libro.titulo, libro.autor.toString(),
@@ -55,15 +61,18 @@ public class PublicacionService {
         }
     }
 
-    public Comentario guardarComentario(ComentarioDTO comentario) throws IOException {
+
+    public Comentario guardarComentario(ComentarioDTO comentario) {
         try {
-            Comentario comen = this.comentRepository.save(new Comentario(comentario.getComentario(), comentario.getIdPublicacion(), comentario.getUser_id()));
+            Comentario c = new Comentario(comentario.getComentario(), comentario.getIdPublicacion(), comentario.getUser_id());
+            Comentario comen = this.comentRepository.save(c);
             return comen;
         }
         catch (Exception e)
         {
            return null;
         }
+
     }
 
     public Boolean eliminarComentario(String uuid,String idcomentario) {

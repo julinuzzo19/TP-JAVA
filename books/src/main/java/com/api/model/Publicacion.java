@@ -64,4 +64,96 @@ public class Publicacion {
         this.resumen = resumen;
         this.descripcion = descripcion;
     }
+
+    public static Builder builder(){
+        return new Builder();
+    }
+
+    public static class Builder{
+        private int id;
+
+        private String isbn;
+
+        private String titulo;
+
+        private String autor;
+
+        private String linkLibro;
+
+        private String uuidUsuario;
+
+        private String edicion;
+
+        private String estado;
+
+        private String imagen;
+
+        private String resumen;
+
+        private String[] genero;
+
+        private String descripcion;
+
+        public Builder id(int id){
+            this.id = id;
+            return this;
+        }
+
+
+        public Builder isbn(String isbn){
+            this.isbn = isbn;
+            return this;
+        }
+
+
+        public Builder titulo(String titulo){
+            this.titulo = titulo;
+            return this;
+        }
+        public Builder autor(String autor){
+            this.autor = autor;
+            return this;
+        }
+        public Builder linkLibro(String linkLibro){
+            this.linkLibro = linkLibro;
+            return this;
+        }
+        public Builder uuidUsuario(String uuidUsuario){
+            this.uuidUsuario = uuidUsuario;
+            return this;
+        }
+        public Builder genero(String[] genero){
+            this.genero = genero;
+            return this;
+        }
+
+        public Builder estado(String estado){
+            this.estado = estado;
+            return this;
+        }
+        public Builder imagen(String imagen){
+            this.imagen = imagen;
+            return this;
+        }
+        public Builder resumen(String resumen){
+            this.resumen = resumen;
+            return this;
+        }
+        public Builder edicion(String edicion){
+            this.edicion = edicion;
+            return this;
+        }
+        public Builder descripcion(String descripcion){
+            this.descripcion = descripcion;
+            return this;
+        }
+
+
+
+        public Publicacion build(){
+            return new Publicacion(isbn, genero, titulo, autor, imagen
+                    , estado, edicion, uuidUsuario, linkLibro, resumen, descripcion );
+        }
+    }
+
 }

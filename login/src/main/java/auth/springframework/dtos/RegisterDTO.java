@@ -38,4 +38,11 @@ public class RegisterDTO {
     String  name;
     String  lastName;
 
+    public RegisterDTO (String  email,String  password, String  name, String  lastName){
+        this.email=email;
+        this.password=password;
+        this.name=name;
+        this.lastName=lastName;
+    }
+
 }
