@@ -8,6 +8,5 @@ import java.util.Optional;
 @Setter
 @Getter
 public class ModPublicacionDTO {
-    int idPublicacion;
     String descripcion;
 }

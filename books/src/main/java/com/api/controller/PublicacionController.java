@@ -111,8 +111,8 @@ public class PublicacionController {
     @RequestMapping(value="/modificarPublicacion/{idPublicacion}", method = RequestMethod.PUT, produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> modificarPublicacion(@RequestAttribute String user_id,@RequestBody ModPublicacionDTO modPublic, @PathVariable Integer idPublicacion) {
     try{
-        modPublic.setIdPublicacion(idPublicacion);
-        Publicacion resultado = publicService.modificarPublicacion(modPublic,user_id);
+
+        Publicacion resultado = publicService.modificarPublicacion(modPublic,idPublicacion,user_id);
 
         if (resultado != null)
         {

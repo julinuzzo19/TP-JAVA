@@ -131,10 +131,10 @@ public class PublicacionService {
 
     }
 
-    public Publicacion modificarPublicacion(ModPublicacionDTO modPublic, String user_id) {
+    public Publicacion modificarPublicacion(ModPublicacionDTO modPublic,Integer idPublicacion, String user_id) {
         try{
 
-        Optional<Publicacion> publi = this.publiRepository.findById(Integer.valueOf(modPublic.getIdPublicacion()));
+        Optional<Publicacion> publi = this.publiRepository.findById(idPublicacion);
         String usuario = publi.get().getUuidUsuario();
         if(usuario.equals(user_id)){
             publi.get().setDescripcion(modPublic.getDescripcion());
