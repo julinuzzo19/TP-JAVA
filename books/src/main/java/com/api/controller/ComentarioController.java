@@ -102,16 +102,5 @@ public class ComentarioController {
             return new ResponseEntity<>("Error interno del servidor", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-//    @RequestMapping(value="/analizarComentario/{opinion}", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
-//    public String analizarContenido(@PathVariable String opinion)throws IOException {
-//        Sentiment resultado= null;
-//        String result= null;
-//        try {
-//            resultado = analizarService.analyzeSentimentText(opinion,"es");
-//            result = String.valueOf(resultado.getMagnitude());
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//        return result;
-//    }
+
 }

@@ -83,12 +83,12 @@ public class PublicacionController {
         metodo para despublicar una publicacion, solo se hace una baja logica
     * se le cambia de estado a despublicar
     * */
-    @RequestMapping(value="/despublicar/{idPublicacion}", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/despublicar/{idPublicacion}", method = RequestMethod.DELETE, produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> despublicar(@PathVariable String idPublicacion, @RequestAttribute String user_id){
     try {
         Boolean resultado = publicService.despublicar(idPublicacion,user_id);
 
-        if (resultado)
+        if (resultado != null)
         {
             return new ResponseEntity<>("Publicacion eliminada correctamente", HttpStatus.OK);
         }
@@ -105,7 +105,7 @@ public class PublicacionController {
     }
 
     /*metodo para modificar la descripcion de la publicacion*/
-    @RequestMapping(value="/modificarPublicacion/{idPublicacion}", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/modificarPublicacion/{idPublicacion}", method = RequestMethod.PUT, produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> modificarPublicacion(@RequestAttribute String user_id,@RequestBody ModPublicacionDTO modPublic, @PathVariable Integer idPublicacion) {
     try{
         modPublic.setIdPublicacion(idPublicacion);
