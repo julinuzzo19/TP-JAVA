@@ -25,7 +25,7 @@ public class JwtGenerator implements IJwtGenerator {
     public Map<String, String> generateToken(User user) {
 
         String jwtToken="";
-        jwtToken = Jwts.builder().setSubject(String.valueOf(user.getEmail())).claim("user_id",user.getId()).setIssuedAt(new Date()).signWith(SignatureAlgorithm.HS256, "secret").compact();
+        jwtToken = Jwts.builder().claim("user_id",user.getId()).setIssuedAt(new Date()).signWith(SignatureAlgorithm.HS256, "secret").compact();
         Map<String, String> jwtTokenGen = new HashMap<>();
         jwtTokenGen.put("token", jwtToken);
         jwtTokenGen.put("message", message);
