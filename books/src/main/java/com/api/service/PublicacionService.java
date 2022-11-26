@@ -137,7 +137,42 @@ public class PublicacionService {
         Optional<Publicacion> publi = this.publiRepository.findById(idPublicacion);
         String usuario = publi.get().getUuidUsuario();
         if(usuario.equals(user_id)){
+        if (modPublic.getDescripcion() != null){
             publi.get().setDescripcion(modPublic.getDescripcion());
+
+        }
+            if (modPublic.getIsbn() != null){
+                publi.get().setIsbn(modPublic.getIsbn());
+
+            }
+            if (modPublic.getTitulo() != null){
+                publi.get().setTitulo(modPublic.getTitulo());
+
+            }
+            if (modPublic.getAutor() != null){
+                publi.get().setAutor(modPublic.getAutor());
+
+            }
+            if (modPublic.getLinkLibro() != null){
+                publi.get().setLinkLibro(modPublic.getLinkLibro());
+
+            }
+            if (modPublic.getEdicion() != null){
+                publi.get().setEdicion(modPublic.getEdicion());
+
+            }
+            if (modPublic.getImagen() != null){
+                publi.get().setImagen(modPublic.getImagen());
+
+            }
+            if (modPublic.getResumen() != null){
+                publi.get().setResumen(modPublic.getResumen());
+
+            }
+            if (modPublic.getGenero() != null){
+                publi.get().setGenero(modPublic.getGenero());
+            }
+
            return this.publiRepository.save(publi.get());
         }
             return null;
@@ -145,6 +180,7 @@ public class PublicacionService {
         }
         catch (Exception e)
         {
+            System.out.print(e.getMessage());
             return null;
         }
     }
