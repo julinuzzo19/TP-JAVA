@@ -12,4 +12,12 @@ public class ComentarioDTO {
     String comentario;
     int idPublicacion;
     String user_id;
+
+    public ComentarioDTO(){}
+
+    public ComentarioDTO(String comentario, int idPublicacion, String user){
+        this.comentario = comentario;
+        this.idPublicacion = idPublicacion;
+        this.user_id = user;
+    }
 }
