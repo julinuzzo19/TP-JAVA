@@ -61,6 +61,7 @@ public class PublicacionController {
     }
 
     /*metodo para publicar el libro encontrado agregandole una opinion*/
+    @Operation(summary = "/publicar", security = @SecurityRequirement(name = "bearerAuth"))
     @RequestMapping(value="/publicar", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> guardarPublicacion(@RequestAttribute String user_id,@RequestBody PublicarDTO publicacionBody)throws IOException {
         try {
@@ -83,6 +84,7 @@ public class PublicacionController {
         metodo para despublicar una publicacion, solo se hace una baja logica
     * se le cambia de estado a despublicar
     * */
+    @Operation(summary = "/despublicar/", security = @SecurityRequirement(name = "bearerAuth"))
     @RequestMapping(value="/despublicar/{idPublicacion}", method = RequestMethod.DELETE, produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> despublicar(@PathVariable String idPublicacion, @RequestAttribute String user_id){
     try {
@@ -105,6 +107,7 @@ public class PublicacionController {
     }
 
     /*metodo para modificar la descripcion de la publicacion*/
+    @Operation(summary = "/modificarPublicacion/", security = @SecurityRequirement(name = "bearerAuth"))
     @RequestMapping(value="/modificarPublicacion/{idPublicacion}", method = RequestMethod.PUT, produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> modificarPublicacion(@RequestAttribute String user_id,@RequestBody ModPublicacionDTO modPublic, @PathVariable Integer idPublicacion) {
     try{

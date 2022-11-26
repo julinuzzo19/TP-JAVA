@@ -6,6 +6,8 @@ import com.api.service.AnalizarOpinionService;
 import com.api.service.LibrosService;
 import com.api.service.PublicacionService;
 //import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import javassist.NotFoundException;
 import javassist.tools.web.BadHttpRequest;
 import net.bytebuddy.implementation.bytecode.Throw;
@@ -37,6 +39,7 @@ public class ComentarioController {
     }
 
     /*metodo para agregar comentario a una publicacion*/
+    @Operation(summary = "/comentar", security = @SecurityRequirement(name = "bearerAuth"))
     @RequestMapping(value="/comentar", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> comentarPublicacion(@RequestBody ComentarioDTO comentarioBody, @RequestAttribute String user_id)throws IOException {
 
@@ -63,7 +66,8 @@ public class ComentarioController {
 * lo pueden eliminar el creador del comentario y el duenio de la publicadio
 * falta terminar la logica
 * */
-    @RequestMapping(value="/eliminarComentario/{idComentario}", method = RequestMethod.DELETE, produces= MediaType.APPLICATION_JSON_VALUE)
+@Operation(summary = "/eliminarComentario", security = @SecurityRequirement(name = "bearerAuth"))
+@RequestMapping(value="/eliminarComentario/{idComentario}", method = RequestMethod.DELETE, produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> eliminarComentario(@PathVariable String idComentario,@RequestAttribute String user_id)throws IOException {
 
         try {
@@ -84,6 +88,7 @@ public class ComentarioController {
     }
 
     /*metodo para modificar la descripcion del comentaroio*/
+    @Operation(summary = "/modificarComentario/", security = @SecurityRequirement(name = "bearerAuth"))
     @RequestMapping(value="/modificarComentario/{idComentario}", method = RequestMethod.PUT, produces= MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> modificarComentario(@RequestBody ModComentarioDTO modComentario,@PathVariable Integer idComentario,@RequestAttribute String user_id)throws IOException {
         try{

@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/user")
+@RequestMapping("/auth")
 public class UserController {
     private IUserService userService;
     private IJwtGenerator jwtGenerator;
@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> postUser(@RequestBody RegisterDTO user){
+    public ResponseEntity<Object> postUser(@RequestBody RegisterDTO user){
         try{
             userService.saveUser(user);
             return new ResponseEntity<>(user, HttpStatus.CREATED);
@@ -34,14 +34,14 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginDTO user) {
+    public ResponseEntity<Object> loginUser(@RequestBody LoginDTO user) {
         try {
             if(user.getEmail() == null || user.getPassword() == null) {
-                throw new UserNotFoundException("UserName or Password is Empty");
+                throw new UserNotFoundException("No se ha encontrado el email o contraseña");
             }
             User userData = userService.getUserByEmailAndPassword(user.getEmail(), user.getPassword());
             if(userData == null){
-                throw new UserNotFoundException("UserName or Password is Invalid");
+                throw new UserNotFoundException("Credenciales incorrectas");
             }
             return new ResponseEntity<>(jwtGenerator.generateToken(userData), HttpStatus.OK);
         } catch (UserNotFoundException e) {

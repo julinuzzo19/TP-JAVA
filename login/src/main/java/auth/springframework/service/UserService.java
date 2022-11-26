@@ -33,7 +33,7 @@ public class UserService implements IUserService {
     public User getUserByEmailAndPassword(String email, String password) throws UserNotFoundException {
         User user = userRepository.findByEmailAndPassword(email, password);
         if(user == null){
-            throw new UserNotFoundException("Invalid id and password");
+            throw new UserNotFoundException("Credenciales incorrectas");
         }
         return user;
     }
