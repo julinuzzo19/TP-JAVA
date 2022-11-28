@@ -102,7 +102,7 @@ public class PublicacionService {
             if(i.getEstado().equals("publicado")){
                 PublicacionCompleta publicCompl = new PublicacionCompleta();
                 publicCompl.setPublicacion(i);
-                List<Comentario> comentarios = this.comentRepository.findByIdPublicacionAndEliminado(i.getId(),0);
+                List<Comentario> comentarios = this.comentRepository.findByIdPublicacionAndEliminado(i.getId(),false);
                 List<Comentario> comentariosBuenos = new ArrayList<Comentario>();
                 for(Comentario c : comentarios){
                     float valor = this.analizarComentario(c.getComentario());
@@ -211,7 +211,7 @@ public class PublicacionService {
             if(i.getEstado().equals("publicado")){
                 PublicacionCompleta publicCompl = new PublicacionCompleta();
                 publicCompl.setPublicacion(i);
-                List<Comentario> comentarios = this.comentRepository.findByIdPublicacionAndEliminado(i.getId(),0);
+                List<Comentario> comentarios = this.comentRepository.findByIdPublicacionAndEliminado(i.getId(),false);
                 List<Comentario> comentariosBuenos = new ArrayList<Comentario>();
                 for(Comentario c : comentarios){
                     comentariosBuenos.add(c);

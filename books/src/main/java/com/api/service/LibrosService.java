@@ -67,7 +67,7 @@ public class LibrosService {
             libro.setTitulo(i.getVolumeInfo().getTitle());
             libro.setAutor(i.getVolumeInfo().getAuthors());
             libro.setResumen(i.getVolumeInfo().getDescription());
-            libro.setIsbn(String.valueOf(i.getVolumeInfo().getIndustryIdentifiers().get(0)));
+            libro.setIsbn(i.getVolumeInfo().getIndustryIdentifiers().get(0).getIdentifier());
             libro.setLinkLibro(i.getVolumeInfo().getInfoLink());
             libro.setEdicion(i.getVolumeInfo().getPublishedDate()+" "+ i.getVolumeInfo().getPublisher());
             if(i.getVolumeInfo().getImageLinks() != null){

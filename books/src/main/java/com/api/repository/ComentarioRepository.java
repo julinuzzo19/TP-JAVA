@@ -11,6 +11,6 @@ public interface ComentarioRepository extends JpaRepository<Comentario, Integer>
 
 
     List<Comentario> findByIdPublicacion(int idPublicacion);
-    List<Comentario> findByIdPublicacionAndEliminado(int idPublicacion,int eliminado);
+    List<Comentario> findByIdPublicacionAndEliminado(int idPublicacion,Boolean eliminado);
 
 }
