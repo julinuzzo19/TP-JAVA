@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "stalwart-bounty-354313",
+  "private_key_id": "ef5da10153c8a98434a20abf9b864f80213a480b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDD1WF+rKUFIpFy\n0WnmLaevXuz6NxPLYPU3E/MpOXc/T6PrTHM0D4JaFTlIUaf74Yk34m9jCLjHKtdu\ngaNDukWa/s6P5uMGRlUbNMJQzxYhqO5J5l218HroobDw2vYIIoMdiSjMr7mMgKCh\n+B+L1XgSrJY/kEY/iCZ8KXpN7JAHvn86IeeYTNQZLNU67ZUrFfmhh8I8KCRewNzk\n1gBGYeOP0YSHWHthHRPNnZChGGT+q7XHZyHyyk5P/69G2srrgC72RU4MU05d6+h8\nFznVqLj56aUpy2emDoq785EJmP29NOjPKjVK+m4mgiTWS+JTxpNeSsoVVW6m8ZS6\n2jiLMTKDAgMBAAECggEAHYHh2ldDgtC7b2cBbhGJV4HV8uUTTPeTiz8syj836hNj\nGg8KDsPwJV2sT2rKWnLDHRINLDQXZMneQxmH0v/WrBeNDUlsrLiH61JZncPOTGJq\nto+I+uM8ycpPNxjEWI5xXiUZai9newsIk88nWwezu3CY2llaqbOnRNnFGB0Mc2Cr\npX9Nnf4TqtgehI4Q0D33baO28aIPTFivb5ZkF1rJawmtHN5eE2rzfVE7+UZcgk6+\nGmVck3wtbwPjrYmqU/7Z/ps2lmf7Lc+FuAXUfE0ssanIOWvn/RuyA5L0Y3SqQiss\nIdbxBpg/Na1u2QgFJ1OQQosLjSuQiRjqafJeXph0jQKBgQDvSejVs0qijjouHcCJ\nVb+ibCGhBdbgki0Sw3zzDVCaXF+kJRPFEdbD0w+ep/Zmq/ENMN3Rz7g88FeQk/NX\nXwrq2eQdggM7kDnBmXt7XbG1exUepbyWpJk/KhH3CpwpNXBlmtluB8ZntwGNFVjA\nyQFE4catXKF623jJ7auVnucNXwKBgQDRgpBLUF/G213pCRHBZoZA2sfPoKACB/iB\n7YVJgzkuVJhxpFVJuMyxxIAcfBpu9NQUb0QZhbuMB8b8lYgKLcFtmqXrRo2TvFas\nGNUed8iZrQYfNcrz6IgFwKZcWZVrpgPAd8puuaHWc4el3b8ieZpkA4/QjL2alrm0\n8kbw6dcJXQKBgQCbUYMTKxRX3S/AfUlbG1CPMdbGOQ8Xp2ogUsmIzeyytSDTX8ms\nUf7wDtCFsApM7HBDmqNwq36v92UvEAmUfbmNZS8fRCOrBtumYWR4WAGgharYwMVf\nlqluCXWtv7JLQUeae9+D/wH2kiAsnl2EjTQIrPAT2RtrroeBsoZ8UK8yywKBgGvA\nhMnXWosBw7jYq0MWobG1U9KbP/ALfWoFaOm4Da6gX48C/8Jcwxoif+kmgsnSLUkd\nOJ8PwrdwQI0jssXZZoQiZ3cr4CC9Wq5ET0fOP2OaM23V0r3DOEINJQKWKF0nEwLo\nGTr9ShjrbjaGZ4kplZgepNaTq+hX4McJXCcHfUsZAoGAd+3K6PEuT+78lt3wvtd8\nuiD26ptcrCAsmJ+52TTH2mQ+CIC62sdN3dLtPnrIs+izqALmqYo6Ox+7yUiWK6ti\n4HyZX0FNY/dR8SEUbYEUSM1ZpXRon5YWH/HEhEWeKjtgLEuauYbd3SlMLow0VMD8\nKF1I5oYNPNZ0sj5F5ap1EiM=\n-----END PRIVATE KEY-----\n",
+  "client_email": "javabooks@stalwart-bounty-354313.iam.gserviceaccount.com",
+  "client_id": "101436728715569191391",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/javabooks%40stalwart-bounty-354313.iam.gserviceaccount.com"
+}

@@ -148,6 +148,7 @@ public class PublicacionController {
             return new ResponseEntity<>( e.getMessage(), HttpStatus.NOT_FOUND);
     }
         catch (Exception e){
+           System.out.print(e.getMessage());
         return new ResponseEntity<>("Error interno del servidor", HttpStatus.INTERNAL_SERVER_ERROR);
     }
     }
