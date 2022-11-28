@@ -68,7 +68,7 @@ public class PublicacionController {
         Publicacion publicacion = publicService.savePublicacion(publicacionBody,user_id);
         if (publicacion != null)
         {
-            return new ResponseEntity<>(publicacion, HttpStatus.OK);
+            return new ResponseEntity<>(publicacion, HttpStatus.CREATED);
         }
         throw new BadHttpRequest();
 
